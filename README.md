@@ -1,7 +1,7 @@
 react-orbitjs
 =============
 
-[![Travis](https://img.shields.io/travis/developertown/react-orbitjs.svg)](https://travis-ci.org/developertown/react-orbitjs)
+[![Build Status](https://travis-ci.com/developertown/react-orbitjs.svg?branch=master)](https://travis-ci.com/developertown/react-orbitjs)
 [![Maintainability](https://api.codeclimate.com/v1/badges/9755e12c66ccc470efad/maintainability)](https://codeclimate.com/github/developertown/react-orbitjs/maintainability)
 
 [React](https://reactjs.org/) bindings for [Orbit.js](http://orbitjs.com/).
@@ -32,14 +32,14 @@ API
 ---
 
  - Context / Data Store Access
-  - `OribtProvider`
-  - `APIProvider`
-  - `withOrbit`
+   - `OribtProvider`
+   - `APIProvider`
+   - `withOrbit`
 
  - Utilities
-  - `query`
-  - `strategies`
-    - `pessimisticWithRemoteIds`
+   - `query`
+   - `strategies`
+     - `pessimisticWithRemoteIds`
   - Errors 
     - `ErrorMessage`
     - `parseError`
@@ -50,6 +50,8 @@ API
     - `remoteIdentityFrom`
     - `attributesFor`
 
+
+---------------------------
 
 ### `<OrbitProvider />`
 
