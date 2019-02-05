@@ -55,26 +55,110 @@ API
 
 ### `<OrbitProvider />`
 
+```ts
+import { OrbitProvider } from 'react-orbitjs';
+
+
+```
+
 ### `<APIProvider />`
+
+```ts
+import { APIProvider } from 'react-orbitjs';
+
+
+```
 
 ### `withOrbit`
 
+```ts
+import { withOrbit } from 'react-orbitjs';
+
+
+```
+
 ### `query`
+
+```ts
+import { query } from 'react-orbitjs';
+
+
+```
 
 ### `strategies`
 
+```ts
+import { strategies, APIProvider } from 'react-orbitjs';
+
+
+```
+
 ### `pessimisticWithRemoteIds`
+
+```ts
+import { strategies } from 'react-orbitjs';
+
+const strategy = strategies.pessimisticWithRemoteIds;
+
+
+```
 
 ### `<ErrorMessage />`
 
+```ts
+import { ErrorMessage } from 'react-orbitjs';
+
+
+```
+
 ### `parseError`
+
+```ts
+import { parseError } from 'react-orbitjs';
+
+
+```
 
 ### `pushPayload`
 
+```ts
+import { pushPayload } from 'react-orbitjs';
+
+
+```
+
 ### `recordIdentityFrom`
+
+```ts
+import { recordIdentityFrom } from 'react-orbitjs';
+
+
+```
+
 ### `localIdFromRecordIdentity`
+
+```ts
+import { localIdFromRecordIdentity } from 'react-orbitjs';
+
+
+```
+
 ### `remoteIdentityFrom`
+
+```ts
+import { remoteIdentityFrom } from 'react-orbitjs';
+
+
+```
+
 ### `attributesFor`
+
+```ts
+import { attributesFor } from 'react-orbitjs';
+
+
+```
+
 
 
 
