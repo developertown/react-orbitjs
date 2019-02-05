@@ -32,8 +32,8 @@ API
 ---
 
  - Context / Data Store Access
-   - `OribtProvider`
-   - `APIProvider`
+   - [`OribtProvider`](#orbitprovider-)
+   - [`APIProvider`](#apiprovider-)
    - `withOrbit`
 
  - Utilities
