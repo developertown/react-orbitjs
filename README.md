@@ -34,21 +34,21 @@ API
  - Context / Data Store Access
    - [`OribtProvider`](#orbitprovider-)
    - [`APIProvider`](#apiprovider-)
-   - `withOrbit`
+   - [`withOrbit`](#orbitprovider)
 
  - Utilities
-   - `query`
-   - `strategies`
-     - `pessimisticWithRemoteIds`
+   - [`query`](#query)
+   - [`strategies`](#strategies)
+     - [`pessimisticWithRemoteIds`](#pessimisticwithremoteids)
   - Errors 
-    - `ErrorMessage`
-    - `parseError`
+    - [`ErrorMessage`](#errormessage)
+    - [`parseError`](#parseerror)
   - Utils
-    - `pushPayload`
-    - `recordIdentityFrom`
-    - `localIdFromRecordIdentity`
-    - `remoteIdentityFrom`
-    - `attributesFor`
+    - [`pushPayload`](#pushpayload)
+    - [`recordIdentityFrom`](#recordidentityfrom)
+    - [`localIdFromRecordIdentity`](#localidfromrecordidentity)
+    - [`remoteIdentityFrom`](#remoteidentityfrom)
+    - [`attributesFor`](#attributesfor)
 
 
 ---------------------------
