@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { DataProvider } from 'react-orbitjs';
 import Store from '@orbit/store';
-import Coordinator from '@orbit/coordinator';
 import { Source } from '@orbit/data';
 
 import { ICreateStoreResult } from '~/strategies/pessimistic-with-remote-ids';
@@ -15,10 +14,7 @@ interface IState {
   sources?: { [sourceName: string]: Source };
 }
 
-// TODO: pull this in to the library
 export class APIProvider extends React.Component<IProps, IState> {
-  coordinator: Coordinator;
-
   state = { store: undefined, sources: undefined };
 
   constructor(props: any) {

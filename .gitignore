@@ -16,6 +16,7 @@
 
 ### Build artefact
 # /dist/
+/tmp
 
 ### Test artefact
 /coverage/
