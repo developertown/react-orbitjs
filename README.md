@@ -100,7 +100,7 @@ import { OrbitProvider } from 'react-orbitjs';
 import Store from '@orbit/store';
 import { Source } from '@orbit/data';
 
-import { ICreateStoreResult } from '~/strategies/pessimistic-with-remote-ids';
+import { ICreateStoreResult } from 'react-orbitjs/strategies/pessimistic-with-remote-ids';
 
 interface IProps {
   storeCreator: () => Promise<ICreateStoreResult>;
@@ -134,9 +134,9 @@ export class APIProvider extends React.Component<IProps, IState> {
     }
 
     return (
-      <DataProvider dataStore={store} sources={sources}>
+      <OrbitProvider dataStore={store} sources={sources}>
         {this.props.children}
-      </DataProvider>
+      </OrbitProvider>
     );
   }
 }

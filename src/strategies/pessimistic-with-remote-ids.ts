@@ -23,6 +23,7 @@ export class RemoteIdJSONAPISerializer extends JSONAPISerializer {
   }
 }
 
+// todo: these need to get pulled out of here, because all storeCreator functions should use them
 export interface ICreateStoreOptions {
   logging?: boolean;
 }
