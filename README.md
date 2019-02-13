@@ -35,6 +35,7 @@ API
    - [`APIProvider`](#apiprovider-)
    - [`OribtProvider`](#orbitprovider-)
    - [`withOrbit`](#orbitprovider)
+   - [`useOrbit`](#useorbit)
 
  - Utilities
    - [`query`](#query)
@@ -168,6 +169,26 @@ export default compose(
   }))
 )(Display);
 
+```
+
+### `useOrbit`
+
+A hook for getting access to the orbit context within functional components.
+
+```ts
+import { useOrbit } from 'react-orbitjs';
+
+export default function Example() {
+  const { dataStore } = useOrbit();
+
+  const planets = dataStore.cache.query(q => q.findRecords('planet'));
+
+  return planets.map(planet => {
+    return (
+      <Planet key={planet.id} planet={planet} />
+    );
+  });
+}
 ```
 
 ### `query`

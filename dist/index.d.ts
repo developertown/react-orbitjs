@@ -4,5 +4,6 @@ export { withOrbit, withData } from './components/with-data';
 export { MapRecordsToProps } from './components/shared';
 export { query, IProvidedProps as IQueryProps } from './components/query';
 export { default as strategies } from './strategies';
+export * from './hooks';
 export * from './components/errors';
 export * from './utils';

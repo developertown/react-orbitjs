@@ -25,7 +25,12 @@ cd $frontend_directory
 # swap out react-orbitjs with the latest commit
 jq ".\"react-orbitjs\" = \"${TRAVIS_REPO_SLUG}#${TRAVIS_COMMIT}\"" package.json > package.tmp && mv package.tmp package.json
 
-yarn install
+yarn install --pure-lockfile
+
+set +e
+yarn outdated
+set -e
+
 yarn test:ci
 
 

@@ -10,7 +10,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const React = require("react");
 const react_orbitjs_1 = require("react-orbitjs");
-// TODO: pull this in to the library
 class APIProvider extends React.Component {
     constructor(props) {
         super(props);
@@ -28,7 +27,7 @@ class APIProvider extends React.Component {
         if (!store || !sources) {
             return null;
         }
-        return (React.createElement(react_orbitjs_1.DataProvider, { dataStore: store, sources: sources }, this.props.children));
+        return (React.createElement(react_orbitjs_1.OrbitProvider, { dataStore: store, sources: sources }, this.props.children));
     }
 }
 exports.APIProvider = APIProvider;

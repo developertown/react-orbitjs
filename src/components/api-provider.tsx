@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { DataProvider } from 'react-orbitjs';
+import { OrbitProvider } from 'react-orbitjs';
 import Store from '@orbit/store';
 import { Source } from '@orbit/data';
 
@@ -37,9 +37,9 @@ export class APIProvider extends React.Component<IProps, IState> {
     }
 
     return (
-      <DataProvider dataStore={store} sources={sources}>
+      <OrbitProvider dataStore={store} sources={sources}>
         {this.props.children}
-      </DataProvider>
+      </OrbitProvider>
     );
   }
 }
