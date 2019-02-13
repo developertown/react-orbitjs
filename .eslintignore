@@ -6,3 +6,4 @@
 /coverage
 .git
 /tests/-dummy-app
+/dist

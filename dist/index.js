@@ -20,6 +20,7 @@ var query_1 = require("./components/query");
 exports.query = query_1.query;
 var strategies_1 = require("./strategies");
 exports.strategies = strategies_1.default;
+__export(require("./hooks"));
 // TODO: why can't I import from subdirectories in the built package?
 __export(require("./components/errors"));
 __export(require("./utils"));

@@ -21,6 +21,8 @@ export { query, IProvidedProps as IQueryProps } from './components/query';
 
 export { default as strategies } from './strategies';
 
+export * from './hooks';
+
 // TODO: why can't I import from subdirectories in the built package?
 export * from './components/errors';
 export * from './utils';
