@@ -17,7 +17,7 @@ how to use this package.
 Installation
 ------------
 
-_react-orbitjs requires React 16 and Orbit 0.15 or later._
+_react-orbitjs requires React >= 16.8 and Orbit 0.15 or later._
 
 _yarn_
 
@@ -27,6 +27,84 @@ yarn add developertown/react-orbitjs
 Note: there is no published npm package at the moment, but part of C.I. is testing the latest build against projects that use this library.
 
 See: "External partner tests" in travis.
+
+
+Usage
+-----
+
+### Interacting with the data store
+#### Hook
+
+```tsx
+import { useOrbit } from 'react-orbitjs';
+
+export default function Example() {
+  const { dataStore } = useOrbit();
+
+  const planets = dataStore.cache.query(q => q.findRecords('planet'));
+
+  return planets.map(planet => {
+    return (
+      <Planet key={planet.id} planet={planet} />
+    );
+  });
+}
+```
+
+#### Higher-order Component
+
+```tsx
+import { withOrbit } from 'react-orbitjs';
+import { compose } from 'recompose';
+import { withRouter } from 'react-router';
+
+import Display from './display';
+
+export default compose(
+  withRouter,
+  // NOTE: withOrbit is a cacheOnly querier
+  withOrbit(({ project }) => ({
+    // all of these will be passed as props to `Display` and will cause re-renders if any of 
+    // the underlying data in the store for these records / queries changes
+    project: (q) => q.findRecord(project),
+    organization: (q) => q.findRelatedRecord(project, 'organization'),
+    owner: (q) => q.findRelatedRecord(project, 'owner'),
+  }))
+)(Display);
+```
+
+### Live Query an API
+
+#### Hook
+
+```tsx
+import { useOrbit } from 'react-orbitjs';
+
+export default function Example() {
+  const { isLoading, result, error } = useOrbitQuery(QueryTerm | QueryTerm[]);
+
+  // TODO: this still needs to be implemented
+}
+```
+
+#### Higher-order Component
+
+```ts
+import { query } from 'react-orbitjs';
+import { compose } from 'recompose';
+
+import Display from './display';
+
+return compose(
+  query(() => {
+    return {
+      users: (q) => q.findRecords(USER),
+    };
+  }),
+)(Display);
+```
+
+
 
 API
 ---
