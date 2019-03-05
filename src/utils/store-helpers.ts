@@ -1,7 +1,7 @@
 import { RecordIdentity } from '@orbit/data';
 import { assert } from '@orbit/utils';
 import Store from '@orbit/store';
-import { RecordsToProps } from '~/components/shared';
+import { RecordsToProps } from '../components/shared';
 
 export interface IBuildNewOptions<TAttrs, TRelationships> {
   attributes?: TAttrs;
@@ -98,4 +98,4 @@ export function getDataFromCache<TResult>(store: Store, queries: RecordsToProps)
   });
 
   return results as TResult;
-};
+}

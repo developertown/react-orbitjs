@@ -1,19 +1,12 @@
-import {
-  useContext,
-  useEffect,
-  Dispatch,
-  useMemo,
-  useCallback,
-  useState,
-  SetStateAction,
-} from 'react';
+import { useContext, useEffect, Dispatch, useMemo, useState, SetStateAction } from 'react';
 import { OrbitContext } from '../components/orbit-context';
 import { IProps as IOrbitProviderProps } from '../components/data-provider';
 import { RecordsToProps } from '../components/shared';
 import Store from '@orbit/store';
-import { getDataFromCache } from '~/utils/store-helpers';
+import { getDataFromCache } from '../utils/store-helpers';
 import { Transform } from '@orbit/data';
 import { doesTransformCauseUpdate } from '../components/with-data/subscriber/does-transform-cause-update';
+import { determineSubscriptions, IQuerySubscriptions } from '../components/with-data/subscriber/determine-subscriptions';
 
 interface SubscriptionState<T> {
   subscriptions: T;
@@ -31,26 +24,34 @@ export function useOrbit<TSubscriptions extends object>(
 function useCacheSubscription<TResult>(subscribeToQueries: RecordsToProps): TResult {
   const { dataStore } = useContext<IOrbitProviderProps>(OrbitContext);
   const subscriptionKeys = Object.keys(subscribeToQueries || {});
+  const subscriptions = determineSubscriptions(dataStore, subscribeToQueries);
+  const hasSubscriptions = hasKeys(subscribeToQueries);
 
   const initialData = useMemo<TResult>(
-    () => getDataFromCache(dataStore, subscribeToQueries || {}),
-    subscriptionKeys
+    () => {
+      if (hasSubscriptions) {
+        return getDataFromCache(dataStore, subscribeToQueries || {});
+      }
+      
+      return {} as any;
+    },
+    [...subscriptionKeys, subscriptions]
   );
   const [state, setState] = useState<TResult>(initialData);
-  const handleTransform = useCallback(
+  const handleTransform = useMemo(
     () => subscribeTo(dataStore, setState, state, subscribeToQueries),
-    subscriptionKeys
+    [...subscriptionKeys, subscriptions]
   );
 
   useEffect(() => {
-    if (subscribeToQueries) {
+    if (hasSubscriptions) {
       dataStore.on('transform', handleTransform);
     }
 
     return () => {
       dataStore.off('transform', handleTransform);
     };
-  }, subscriptionKeys);
+  }, [...subscriptionKeys, subscriptions]);
 
   return state;
 }
@@ -61,7 +62,8 @@ function subscribeTo<TSubscriptions>(
   state: TSubscriptions,
   subscribeToQueries: RecordsToProps
 ) {
-  const hasSubscriptions = Object.keys(subscribeToQueries).length > 0;
+  const subscriptions = determineSubscriptions(store, subscribeToQueries);
+  const hasSubscriptions = hasKeys(subscribeToQueries);
 
   return function(transform: Transform) {
     if (!hasSubscriptions) {
@@ -71,14 +73,18 @@ function subscribeTo<TSubscriptions>(
     const shouldUpdate = doesTransformCauseUpdate(
       store,
       transform,
-      subscribeToQueries as any,
+      subscriptions,
       state
     );
 
     if (shouldUpdate) {
       const results = getDataFromCache(store, subscribeToQueries) as TSubscriptions;
-
+      console.log('updating...', results);
       setState({ ...results });
     }
   };
+}
+
+function hasKeys(obj: any) {
+  return Object.keys(obj || {}).length > 0;
 }

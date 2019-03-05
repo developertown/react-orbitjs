@@ -5,6 +5,7 @@ const getDisplayName_1 = require("../-utils/getDisplayName");
 const utils_1 = require("@orbit/utils");
 const determine_subscriptions_1 = require("./determine-subscriptions");
 const does_transform_cause_update_1 = require("./does-transform-cause-update");
+const store_helpers_1 = require("../../../utils/store-helpers");
 // import { areArraysShallowlyEqual } from './helpers';
 function withDataSubscription(mapRecordsToProps, options) {
     return function wrapSubscription(WrappedComponent) {
@@ -61,13 +62,7 @@ function withDataSubscription(mapRecordsToProps, options) {
                         }
                         const { dataStore } = this.props;
                         const queryForProps = mapRecordsToProps(this.props) || {};
-                        let results = {};
-                        Object.keys(queryForProps).forEach((propName) => {
-                            const query = queryForProps[propName](dataStore.queryBuilder);
-                            const result = dataStore.cache.query(query);
-                            results[propName] = result;
-                        });
-                        return results;
+                        return store_helpers_1.getDataFromCache(dataStore, queryForProps);
                     };
                     utils_1.assert(`Could not find "dataStore" in props of "${componentDisplayName}". \n` +
                         `Either wrap the root component in a <DataProvider>, \n` +
