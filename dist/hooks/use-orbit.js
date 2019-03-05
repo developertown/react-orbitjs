@@ -44,7 +44,6 @@ function subscribeTo(store, setState, state, subscribeToQueries) {
         const shouldUpdate = does_transform_cause_update_1.doesTransformCauseUpdate(store, transform, subscriptions, state);
         if (shouldUpdate) {
             const results = store_helpers_1.getDataFromCache(store, subscribeToQueries);
-            console.log('updating...', results);
             setState(Object.assign({}, results));
         }
     };

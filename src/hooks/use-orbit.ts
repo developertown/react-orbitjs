@@ -6,7 +6,7 @@ import Store from '@orbit/store';
 import { getDataFromCache } from '../utils/store-helpers';
 import { Transform } from '@orbit/data';
 import { doesTransformCauseUpdate } from '../components/with-data/subscriber/does-transform-cause-update';
-import { determineSubscriptions, IQuerySubscriptions } from '../components/with-data/subscriber/determine-subscriptions';
+import { determineSubscriptions } from '../components/with-data/subscriber/determine-subscriptions';
 
 interface SubscriptionState<T> {
   subscriptions: T;
@@ -79,7 +79,7 @@ function subscribeTo<TSubscriptions>(
 
     if (shouldUpdate) {
       const results = getDataFromCache(store, subscribeToQueries) as TSubscriptions;
-      console.log('updating...', results);
+
       setState({ ...results });
     }
   };
