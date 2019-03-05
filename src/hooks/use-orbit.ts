@@ -13,7 +13,7 @@ import { RecordsToProps } from '../components/shared';
 import Store from '@orbit/store';
 import { getDataFromCache } from '~/utils/store-helpers';
 import { Transform } from '@orbit/data';
-import { doesTransformCauseUpdate } from '~/components/with-data/subscriber/does-transform-cause-update';
+import { doesTransformCauseUpdate } from '../components/with-data/subscriber/does-transform-cause-update';
 
 interface SubscriptionState<T> {
   subscriptions: T;
