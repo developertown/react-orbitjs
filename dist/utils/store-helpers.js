@@ -48,3 +48,13 @@ function recordIdentityFromKeys(store, { type, id, keys }) {
     return recordIdentity;
 }
 exports.recordIdentityFromKeys = recordIdentityFromKeys;
+function getDataFromCache(store, queries) {
+    let results = {};
+    Object.keys(queries).forEach((propName) => {
+        const query = queries[propName](store.queryBuilder);
+        const result = store.cache.query(query);
+        results[propName] = result;
+    });
+    return results;
+}
+exports.getDataFromCache = getDataFromCache;

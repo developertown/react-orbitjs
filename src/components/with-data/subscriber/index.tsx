@@ -9,6 +9,7 @@ import Store from '@orbit/store';
 import { assert } from '@orbit/utils';
 import { IQuerySubscriptions, determineSubscriptions } from './determine-subscriptions';
 import { doesTransformCauseUpdate } from './does-transform-cause-update';
+import { getDataFromCache } from '../../../utils/store-helpers';
 // import { areArraysShallowlyEqual } from './helpers';
 
 export function withDataSubscription<TWrappedProps, TResultingProps>(
@@ -152,16 +153,7 @@ export function withDataSubscription<TWrappedProps, TResultingProps>(
         const { dataStore } = this.props;
         const queryForProps = mapRecordsToProps(this.props) || {};
 
-        let results = {};
-
-        Object.keys(queryForProps).forEach((propName: string) => {
-          const query = queryForProps[propName](dataStore.queryBuilder);
-          const result = dataStore.cache.query(query);
-
-          results[propName] = result;
-        });
-
-        return results as TResultingProps;
+        return getDataFromCache(dataStore, queryForProps);
       };
     };
   };

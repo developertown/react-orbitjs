@@ -7,13 +7,14 @@ module.exports = {
   plugins: [
     'prettier',
     '@typescript-eslint',
+    'react-hooks',
   ],
   extends: [
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
     'prettier',
     "prettier/typescript",
-    "prettier/react"
+    "prettier/react",
   ],
 
   // 0 = off, 1 = warn, 2 = error
@@ -30,6 +31,10 @@ module.exports = {
     'no-unused-vars': 'off',
     'no-fallthrough': 'off', // shorthand
     'no-case-declarations': 'off',
+
+    // hooks
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
 
     // docs
     "require-jsdoc": 'off',

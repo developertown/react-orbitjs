@@ -1,6 +1,7 @@
 import { RecordIdentity } from '@orbit/data';
 import { assert } from '@orbit/utils';
 import Store from '@orbit/store';
+import { RecordsToProps } from '../components/shared';
 
 export interface IBuildNewOptions<TAttrs, TRelationships> {
   attributes?: TAttrs;
@@ -84,4 +85,17 @@ export function recordIdentityFromKeys(store: Store, { type, id, keys }: IIdenti
   keyMap.pushRecord(recordIdentity);
 
   return recordIdentity;
+}
+
+export function getDataFromCache<TResult>(store: Store, queries: RecordsToProps) {
+  let results = {};
+
+  Object.keys(queries).forEach((propName: string) => {
+    const query = queries[propName](store.queryBuilder);
+    const result = store.cache.query(query);
+
+    results[propName] = result;
+  });
+
+  return results as TResult;
 }

@@ -1,5 +1,6 @@
 import { RecordIdentity } from '@orbit/data';
 import Store from '@orbit/store';
+import { RecordsToProps } from '../components/shared';
 export interface IBuildNewOptions<TAttrs, TRelationships> {
     attributes?: TAttrs;
     relationships?: TRelationships;
@@ -27,4 +28,5 @@ export interface IIdentityFromKeys {
     keys?: any;
 }
 export declare function recordIdentityFromKeys(store: Store, { type, id, keys }: IIdentityFromKeys): any;
+export declare function getDataFromCache<TResult>(store: Store, queries: RecordsToProps): TResult;
 export {};
