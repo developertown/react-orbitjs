@@ -27,16 +27,13 @@ function useCacheSubscription<TResult>(subscribeToQueries: RecordsToProps): TRes
   const subscriptions = determineSubscriptions(dataStore, subscribeToQueries);
   const hasSubscriptions = hasKeys(subscribeToQueries);
 
-  const initialData = useMemo<TResult>(
-    () => {
-      if (hasSubscriptions) {
-        return getDataFromCache(dataStore, subscribeToQueries || {});
-      }
-      
-      return {} as any;
-    },
-    [...subscriptionKeys, subscriptions]
-  );
+  const initialData = useMemo<TResult>(() => {
+    if (hasSubscriptions) {
+      return getDataFromCache(dataStore, subscribeToQueries || {});
+    }
+
+    return {} as any;
+  }, [...subscriptionKeys, subscriptions]);
   const [state, setState] = useState<TResult>(initialData);
   const handleTransform = useMemo(
     () => subscribeTo(dataStore, setState, state, subscribeToQueries),
@@ -70,12 +67,7 @@ function subscribeTo<TSubscriptions>(
       return;
     }
 
-    const shouldUpdate = doesTransformCauseUpdate(
-      store,
-      transform,
-      subscriptions,
-      state
-    );
+    const shouldUpdate = doesTransformCauseUpdate(store, transform, subscriptions, state);
 
     if (shouldUpdate) {
       const results = getDataFromCache(store, subscribeToQueries) as TSubscriptions;
