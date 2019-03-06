@@ -39,13 +39,17 @@ Usage
 import { useOrbit } from 'react-orbitjs';
 
 export default function Example() {
-  const { dataStore } = useOrbit();
-
-  const planets = dataStore.cache.query(q => q.findRecords('planet'));
+  const { 
+    dataStore, 
+    subscriptions: { planets } 
+  } = useOrbit({ planets: q => q.findRecords('planet') });
+  
 
   return planets.map(planet => {
+    const moons = dataStore.cache.query(q => q.findRelatedRecords(planet, 'moons');
+    
     return (
-      <Planet key={planet.id} planet={planet} />
+      <Planet key={planet.id} planet={planet} moons={moons} />
     );
   });
 }
