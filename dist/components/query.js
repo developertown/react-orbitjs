@@ -117,8 +117,8 @@ function query(mapRecordsToProps, options) {
                     return responses;
                 });
                 this.tryFetch = (force = false) => __awaiter(this, void 0, void 0, function* () {
-                    const needsFetch = force || (!this.isFetchNeeded() || this.state.isLoading);
-                    if (needsFetch) {
+                    const skipFetch = !this.isFetchNeeded() || this.state.isLoading;
+                    if (skipFetch && !force) {
                         return;
                     }
                     this.setState({ isLoading: true }, () => __awaiter(this, void 0, void 0, function* () {

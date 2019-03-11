@@ -23,7 +23,6 @@ export function useOrbit<TSubscriptions extends object>(
 
 function useCacheSubscription<TResult>(subscribeToQueries: RecordsToProps): TResult {
   const { dataStore } = useContext<IOrbitProviderProps>(OrbitContext);
-  const subscriptionKeys = Object.keys(subscribeToQueries || {});
   const subscriptions = determineSubscriptions(dataStore, subscribeToQueries);
   const hasSubscriptions = hasKeys(subscribeToQueries);
 
@@ -33,11 +32,11 @@ function useCacheSubscription<TResult>(subscribeToQueries: RecordsToProps): TRes
     }
 
     return {} as any;
-  }, [...subscriptionKeys, subscriptions]);
+  }, [dataStore, hasSubscriptions, subscribeToQueries]);
   const [state, setState] = useState<TResult>(initialData);
   const handleTransform = useMemo(
     () => subscribeTo(dataStore, setState, state, subscribeToQueries),
-    [...subscriptionKeys, subscriptions]
+    [dataStore, state, subscribeToQueries]
   );
 
   useEffect(() => {
@@ -48,7 +47,7 @@ function useCacheSubscription<TResult>(subscribeToQueries: RecordsToProps): TRes
     return () => {
       dataStore.off('transform', handleTransform);
     };
-  }, [...subscriptionKeys, subscriptions]);
+  }, [dataStore, handleTransform, hasSubscriptions, subscriptions]);
 
   return state;
 }

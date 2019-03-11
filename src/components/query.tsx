@@ -162,9 +162,9 @@ export function query<T>(mapRecordsToProps: any, options?: IQueryOptions) {
       };
 
       tryFetch = async (force: boolean = false) => {
-        const needsFetch = force || (!this.isFetchNeeded() || this.state.isLoading);
+        const skipFetch = !this.isFetchNeeded() || this.state.isLoading;
 
-        if (needsFetch) {
+        if (skipFetch && !force) {
           return;
         }
 

@@ -13,7 +13,6 @@ function useOrbit(subscribeToQueries) {
 exports.useOrbit = useOrbit;
 function useCacheSubscription(subscribeToQueries) {
     const { dataStore } = react_1.useContext(orbit_context_1.OrbitContext);
-    const subscriptionKeys = Object.keys(subscribeToQueries || {});
     const subscriptions = determine_subscriptions_1.determineSubscriptions(dataStore, subscribeToQueries);
     const hasSubscriptions = hasKeys(subscribeToQueries);
     const initialData = react_1.useMemo(() => {
@@ -21,9 +20,9 @@ function useCacheSubscription(subscribeToQueries) {
             return store_helpers_1.getDataFromCache(dataStore, subscribeToQueries || {});
         }
         return {};
-    }, [...subscriptionKeys, subscriptions]);
+    }, [dataStore, hasSubscriptions, subscribeToQueries]);
     const [state, setState] = react_1.useState(initialData);
-    const handleTransform = react_1.useMemo(() => subscribeTo(dataStore, setState, state, subscribeToQueries), [...subscriptionKeys, subscriptions]);
+    const handleTransform = react_1.useMemo(() => subscribeTo(dataStore, setState, state, subscribeToQueries), [dataStore, state, subscribeToQueries]);
     react_1.useEffect(() => {
         if (hasSubscriptions) {
             dataStore.on('transform', handleTransform);
@@ -31,7 +30,7 @@ function useCacheSubscription(subscribeToQueries) {
         return () => {
             dataStore.off('transform', handleTransform);
         };
-    }, [...subscriptionKeys, subscriptions]);
+    }, [dataStore, handleTransform, hasSubscriptions, subscriptions]);
     return state;
 }
 function subscribeTo(store, setState, state, subscribeToQueries) {
