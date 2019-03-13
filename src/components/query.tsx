@@ -22,6 +22,7 @@ interface IState {
 export interface IQueryOptions {
   passthroughError?: boolean;
   useRemoteDirectly?: boolean;
+  noTimeout?: boolean;
   timeout?: number;
   mapResultsFn?: (props: any, result: any) => Promise<any>;
 }
@@ -54,6 +55,7 @@ const defaultOptions = {
   passthroughError: false,
   useRemoteDirectly: false,
   mapResultsFn: null,
+  noTimeout: false,
   timeout: 5000,
 };
 
@@ -155,7 +157,11 @@ export function query<T>(mapRecordsToProps: any, options?: IQueryOptions) {
         });
 
         if (requestPromises.length > 0) {
-          await timeoutablePromise(opts.timeout, Promise.all(requestPromises));
+          if (opts.noTimeout) {
+            await Promise.all(requestPromises);
+          } else {
+            await timeoutablePromise(opts.timeout, Promise.all(requestPromises));
+          }
         }
 
         return responses;

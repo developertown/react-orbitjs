@@ -8,6 +8,7 @@ export declare type IProvidedProps<T> = IProvidedDefaultProps & T;
 export interface IQueryOptions {
     passthroughError?: boolean;
     useRemoteDirectly?: boolean;
+    noTimeout?: boolean;
     timeout?: number;
     mapResultsFn?: (props: any, result: any) => Promise<any>;
 }

@@ -48,6 +48,7 @@ const defaultOptions = {
     passthroughError: false,
     useRemoteDirectly: false,
     mapResultsFn: null,
+    noTimeout: false,
     timeout: 5000,
 };
 // Example Usage
@@ -112,7 +113,12 @@ function query(mapRecordsToProps, options) {
                         }
                     }));
                     if (requestPromises.length > 0) {
-                        yield timeoutablePromise(opts.timeout, Promise.all(requestPromises));
+                        if (opts.noTimeout) {
+                            yield Promise.all(requestPromises);
+                        }
+                        else {
+                            yield timeoutablePromise(opts.timeout, Promise.all(requestPromises));
+                        }
                     }
                     return responses;
                 });
