@@ -6,10 +6,6 @@ stages:
   - "Quality"
   - "Tests"
 
-matrix:
-  allow_failures:
-    - name: "SIL International: Scriptoria"
-
 
 jobs:
   include:
