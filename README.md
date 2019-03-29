@@ -117,7 +117,8 @@ API
    - [`APIProvider`](#apiprovider-)
    - [`OribtProvider`](#orbitprovider-)
    - [`withOrbit`](#orbitprovider)
-   - [`useOrbit`](#useorbit)
+   - [`useCache`](#usecache)
+   - [`useQuery](#usequery)
 
  - Utilities
    - [`query`](#query)
@@ -253,15 +254,15 @@ export default compose(
 
 ```
 
-### `useOrbit`
+### `usecache`
 
 A hook for getting access to the orbit context within functional components.
 
 ```ts
-import { useOrbit } from 'react-orbitjs';
+import { useCache } from 'react-orbitjs';
 
 export default function Example() {
-  const { dataStore } = useOrbit();
+  const { dataStore } = useCache();
 
   const planets = dataStore.cache.query(q => q.findRecords('planet'));
 
@@ -270,6 +271,34 @@ export default function Example() {
       <Planet key={planet.id} planet={planet} />
     );
   });
+}
+```
+
+### `usequery`
+
+A hook for querying a remote source for records
+
+```ts
+import { useQuery } from 'react-orbitjs';
+
+export default function Example() {
+  const { 
+    isLoading, error, refetch, 
+    result: { planets, stars} 
+  } = useQuery({
+    planets: q => q.findRecords('planet'),
+    stars: q => q.findRecords('star')
+  });
+
+  if (isLoading) return <Loader />;
+  if (error) return <Error error={error} />;
+
+  return (
+    <>
+      stars.map(star => <Star key={star.id} star={star} />);
+      planets.map(planet => <Planet key={planet.id} planet={planet} />);
+    </>
+  )
 }
 ```
 

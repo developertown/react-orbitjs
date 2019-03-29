@@ -17,11 +17,11 @@ export { withOrbit, withData } from './components/with-data';
 
 export { MapRecordsToProps } from './components/shared';
 
-export { query, IProvidedProps as IQueryProps } from './components/query';
+export { query, useQuery, IQueryProps, IQueryOptions, IQueryTermMap } from './query';
 
 export { default as strategies } from './strategies';
 
-export * from './hooks';
+export * from './cache';
 
 // TODO: why can't I import from subdirectories in the built package?
 export * from './components/errors';

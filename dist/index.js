@@ -16,11 +16,12 @@ exports.APIProvider = api_provider_1.APIProvider;
 var with_data_1 = require("./components/with-data");
 exports.withOrbit = with_data_1.withOrbit;
 exports.withData = with_data_1.withData;
-var query_1 = require("./components/query");
+var query_1 = require("./query");
 exports.query = query_1.query;
+exports.useQuery = query_1.useQuery;
 var strategies_1 = require("./strategies");
 exports.strategies = strategies_1.default;
-__export(require("./hooks"));
+__export(require("./cache"));
 // TODO: why can't I import from subdirectories in the built package?
 __export(require("./components/errors"));
 __export(require("./utils"));

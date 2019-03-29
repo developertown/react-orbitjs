@@ -8,9 +8,9 @@ export declare function withData<TWrappedProps, TResultingProps>(mapRecordsToPro
         context: any;
         setState<K extends never>(state: {} | ((prevState: Readonly<{}>, props: Readonly<TWrappedProps>) => {} | Pick<{}, K> | null) | Pick<{}, K> | null, callback?: (() => void) | undefined): void;
         forceUpdate(callBack?: (() => void) | undefined): void;
-        readonly props: Readonly<{
+        readonly props: Readonly<TWrappedProps> & Readonly<{
             children?: React.ReactNode;
-        }> & Readonly<TWrappedProps>;
+        }>;
         state: Readonly<{}>;
         refs: {
             [key: string]: React.ReactInstance;
@@ -21,9 +21,9 @@ export declare function withData<TWrappedProps, TResultingProps>(mapRecordsToPro
         context: any;
         setState<K extends never>(state: {} | ((prevState: Readonly<{}>, props: Readonly<TWrappedProps>) => {} | Pick<{}, K> | null) | Pick<{}, K> | null, callback?: (() => void) | undefined): void;
         forceUpdate(callBack?: (() => void) | undefined): void;
-        readonly props: Readonly<{
+        readonly props: Readonly<TWrappedProps> & Readonly<{
             children?: React.ReactNode;
-        }> & Readonly<TWrappedProps>;
+        }>;
         state: Readonly<{}>;
         refs: {
             [key: string]: React.ReactInstance;

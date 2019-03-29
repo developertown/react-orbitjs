@@ -31,9 +31,9 @@ export declare function withDataSubscription<TWrappedProps, TResultingProps>(map
         context: any;
         setState<K extends keyof TResultingProps>(state: TResultingProps | ((prevState: Readonly<TResultingProps>, props: Readonly<TWrappedProps & IProviderProps>) => TResultingProps | Pick<TResultingProps, K> | null) | Pick<TResultingProps, K> | null, callback?: (() => void) | undefined): void;
         forceUpdate(callBack?: (() => void) | undefined): void;
-        readonly props: Readonly<{
+        readonly props: Readonly<TWrappedProps & IProviderProps> & Readonly<{
             children?: React.ReactNode;
-        }> & Readonly<TWrappedProps & IProviderProps>;
+        }>;
         state: Readonly<TResultingProps>;
         refs: {
             [key: string]: React.ReactInstance;
