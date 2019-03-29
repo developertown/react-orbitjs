@@ -295,8 +295,8 @@ export default function Example() {
 
   return (
     <>
-      stars.map(star => <Star key={star.id} star={star} />);
-      planets.map(planet => <Planet key={planet.id} planet={planet} />);
+      {stars.map(star => <Star key={star.id} star={star} />)}
+      {planets.map(planet => <Planet key={planet.id} planet={planet} />)}
     </>
   )
 }
