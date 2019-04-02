@@ -82,12 +82,22 @@ export default compose(
 #### Hook
 
 ```tsx
-import { useOrbit } from 'react-orbitjs';
+import { useQuery } from 'react-orbitjs';
 
 export default function Example() {
-  const { isLoading, result, error } = useOrbitQuery(QueryTerm | QueryTerm[]);
+  const { 
+    isLoading, error, refetch, 
+    result: { planets, stars} 
+  } = useQuery({ planets: q => q.findRecords('planet') });
 
-  // TODO: this still needs to be implemented
+  if (isLoading) return <Loader />;
+  if (error) return <Error error={error} />;
+
+  return (
+    <>
+      {planets.map(planet => <Planet key={planet.id} planet={planet} />)}
+    </>
+  )
 }
 ```
 
@@ -254,7 +264,7 @@ export default compose(
 
 ```
 
-### `usecache`
+### `useCache`
 
 A hook for getting access to the orbit context within functional components.
 
@@ -274,7 +284,7 @@ export default function Example() {
 }
 ```
 
-### `usequery`
+### `useQuery`
 
 A hook for querying a remote source for records
 
