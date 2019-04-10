@@ -79,12 +79,24 @@ function useQuery(queryBuilderMap, options = {}) {
             .catch(error => {
             dispatch({ type: reducer_1.ERROR, error });
         });
-    }, [queryTermMap, needsFetch, hasResults]);
+    }, [
+        isLoading,
+        hasQueries,
+        hasResults,
+        needsFetch,
+        queryKeys,
+        queryTermMap,
+        querier,
+        remote,
+        mapResultsFn,
+        dataStore,
+        hocProps,
+    ]);
     react_1.useEffect(() => {
         if (needsFetch) {
             tryFetch();
         }
-    }, [needsFetch]);
+    }, [needsFetch, tryFetch]);
     react_1.useEffect(() => {
         setNeedsFetch(true);
     }, [JSON.stringify(queryTermMap)]);
