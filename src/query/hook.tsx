@@ -96,13 +96,25 @@ export function useQuery<TResults extends object, THocProps = any>(
       .catch(error => {
         dispatch({ type: ERROR, error });
       });
-  }, [queryTermMap, needsFetch, hasResults]);
+  }, [
+    isLoading,
+    hasQueries,
+    hasResults,
+    needsFetch,
+    queryKeys,
+    queryTermMap,
+    querier,
+    remote,
+    mapResultsFn,
+    dataStore,
+    hocProps,
+  ]);
 
   useEffect(() => {
     if (needsFetch) {
       tryFetch();
     }
-  }, [needsFetch]);
+  }, [needsFetch, tryFetch]);
 
   useEffect(() => {
     setNeedsFetch(true);

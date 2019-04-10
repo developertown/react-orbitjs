@@ -24,7 +24,7 @@ describe('Acceptance | Basic Fetching', () => {
 
   describe('data is finished loading', () => {
     // NOTE: the endpoint we were using (in application.tsx)
-    //       is no longer active. 
+    //       is no longer active.
     //       need to find a public jsonapi for testing.
     //       maybe I should make one.
     // it('shows a list of ember versions', () => {
